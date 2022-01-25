@@ -1,0 +1,40 @@
+---
+title: "ICA 1"
+author: "Gian Batayola"
+date: "1/14/2022"
+---
+
+```{r}
+library(sqldf)
+order_details <- read.csv("order_details.csv")
+orders <- read.csv("orders.csv")
+territories <- read.csv("territories.csv")
+regions <- read.csv("regions.csv")
+employee_territories <- read.csv("employee_territories.csv")
+employees <- read.csv("employees.csv")
+customers <- read.csv("customers.csv")
+shippers <- read.csv("shippers.csv")
+suppliers <- read.csv("suppliers.csv")
+products <- read.csv("products.csv")
+categories <- read.csv("categories.csv")
+```
+
+```{r}
+# 1 & 2
+products_columns <- sqldf("SELECT ProductID, ProductName, UnitPrice FROM products WHERE UnitsInStock = 0")
+products_columns
+```
+
+```{r}
+# 3
+customers_UK <- sqldf("SELECT * FROM customers WHERE country = 'UK'")
+customers_UK
+```
+
+```{r}
+# 4, used to look at common values
+library(tidyverse)
+glimpse(suppliers)
+glimpse(territories)
+```
+

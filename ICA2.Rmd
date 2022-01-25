@@ -1,0 +1,41 @@
+---
+title: "ICA2"
+author: "Gian Batayola"
+date: "1/21/2022"
+---
+
+```{r}
+library(sqldf)
+orders <- read.csv("orders.csv")
+order_details <- read.csv("order_details.csv")
+customers <- read.csv("customers.csv")
+products <- read.csv("products.csv")
+```
+
+```{r}
+# to investigate
+library(tidyverse)
+glimpse(orders)
+glimpse(order_details)
+glimpse(products)
+```
+
+
+```{r}
+# 1
+country_count <- sqldf("SELECT country, COUNT(country) FROM customers GROUP BY country")
+country_count
+```
+
+```{r}
+# 2
+largest_val <- sqldf("SELECT productName, (unitPrice * UnitsOnOrder) FROM products GROUP BY (unitPrice * UnitsOnOrder)")
+largest_val
+# the highest value product is Wimmers gute with a value of $2,660
+```
+
+```{r}
+# 3
+order_details
+```
+

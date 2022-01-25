@@ -1,0 +1,32 @@
+---
+title: "STT 461 Homework 1"
+author: "Gian Batayola"
+date: "1/24/2022"
+---
+
+```{r}
+# 1
+library(sqldf)
+library(tidyverse)
+orders <- read.csv("orders.csv")
+df <- sqldf("SELECT * FROM orders WHERE shipCountry = 'France' GROUP BY employeeID, shipVia, freight")
+df
+```
+
+```{r}
+# 2
+aggregate(freight ~ shipVia, df, mean)
+
+#shipVia 3 has the largest average cost at $86.83
+```
+
+```{r}
+# 3 
+# we should join order_details and products to get product categories 
+order_details <- read.csv("order_details.csv")
+products <- read.csv("products.csv")
+df_2 <- sqldf("SELECT productName, order_details.productID, order_details.OrderID FROM products INNER JOIN order_details WHERE products.ProductID = order_details.ProductID")
+df_3 <- sqldf("SELECT df_2.ProductName, productID, df.* from df_2 INNER JOIN df WHERE df.orderID = df_2.orderID")
+df_3
+```
+
